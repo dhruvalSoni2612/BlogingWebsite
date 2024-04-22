@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("./partials/head") %>
+    <title>Blog</title>
+    <style>
+      /* Custom Blog Styling */
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #f8f9fa; /* Background color */
+      }
+
+      .container {
+        margin: 0 auto;
+        padding: 20px;
+        text-align: center; /* Center align the content */
+      }
+
+      .card-title {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #333; /* Title color */
+        margin-bottom: 20px;
+      }
+
+      .card-img-top {
+        width: 70%; /* Reduce image size */
+        height: auto;
+        border-radius: 10px;
+        margin-bottom: 20px;
+      }
+
+      .card-text {
+        font-size: 1.2rem;
+        color: #555; /* Text color */
+        margin-bottom: 20px;
+      }
+
+      .author-info {
+        display: flex;
+        align-items: center;
+        justify-content: center; /* Center align author info */
+        margin-bottom: 20px;
+      }
+
+      .author-info img {
+        width: 40px; /* Reduce author image size */
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 10px;
+      }
+
+      .author-name {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #333; /* Author name color */
+      }
+
+      .comment-form {
+        margin-bottom: 20px;
+      }
+
+      .comment-form textarea {
+        width: 100%;
+        padding: 10px;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        resize: none;
+      }
+
+      .comment-form button {
+        background-color: #007bff; /* Button background color */
+        color: #fff; /* Button text color */
+        border: none;
+        padding: 10px 20px;
+        font-size: 1rem;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .comment {
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center; /* Center align comments */
+      }
+
+      .comment img {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        /* margin-right: 10px; */
+      }
+
+      .comment-content {
+        font-size: 1rem;
+        color: #333; /* Comment text color */
+      }
+      .cmtName {
+        margin-right: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include( './partials/nav') %>
+
+    <div class="container">
+      <h2 class="card-title"><%= blog.title %></h2>
+      <img
+        src="<%= blog.coverImageURL %>"
+        class="card-img-top"
+        alt="Blog Cover Image"
+      />
+      <p class="card-text"><%= blog.body %></p>
+
+      <div class="author-info">
+        <img
+          src="<%= blog.createdBy.profileImageUrl %>"
+          alt="Author Profile Image"
+        />
+        <p class="author-name"><%= blog.createdBy.fullName %></p>
+      </div>
+
+      <h3>Comments</h3>
+      <% if (locals.user) { %>
+      <form
+        class="comment-form"
+        action="/blog/comment/<%= blog._id %>"
+        method="post"
+      >
+        <textarea
+          class="form-control"
+          id="content"
+          name="content"
+          rows="3"
+          placeholder="Enter your comment"
+        ></textarea>
+        <button type="submit">Add Comment</button>
+      </form>
+      <% } %>
+
+      <div class="comments">
+        <% comments.forEach(comment => { %>
+        <div class="comment">
+          <img
+            src="<%= comment.createdBy.profileImageUrl %>"
+            alt="Commenter Profile Image"
+          />
+          <span class="cmtName"><%= comment.createdBy.fullName %></span>
+          <p class="comment-content"><%= comment.content %></p>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+    <%- include("./partials/scripts") %>
+  </body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("./partials/head") %>
+    <title>Blog-vlog</title>
+    <style>
+      /* Custom Blog Styling */
+
+      .main {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .blog-card {
+        margin: 30px 30px 30px 30px;
+        border: none;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .blog-card img {
+        object-fit: cover;
+        height: 300px;
+        width: 100%;
+      }
+
+      .blog-card .blog-info {
+        padding: 20px;
+        background-color: #fff;
+        text-align: center; /* Center align text */
+      }
+
+      .blog-card .blog-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 10px;
+      }
+
+      .blog-card .blog-description {
+        margin-top: 20px;
+        color: #555;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2; /* Number of lines to show */
+        -webkit-box-orient: vertical;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include( './partials/nav') %>
+    <div class="container">
+      <div class="main">
+        <!-- Center align the row -->
+        <% blogs.forEach(blog => { %>
+        <div class="col-md-4">
+          <div class="blog-card">
+            <img src="<%= blog.coverImageURL %>" alt="Blog Image" />
+            <div class="blog-info">
+              <h2 class="blog-title"><%= blog.title %></h2>
+              <p class="blog-description"><%= blog.body %></p>
+              <a href="/blog/<%= blog._id %>" class="btn btn-primary">View</a>
+              <!-- Corrected "view" to "View" for consistency -->
+            </div>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+    <%- include("./partials/scripts") %>
+  </body>
+</html>

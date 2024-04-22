@@ -1,0 +1,99 @@
+<style>
+  /* Custom Navbar Styling */
+  .navbar {
+    background-color: #333; /* Black background color */
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .navbar-brand {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ffc107; /* Brand color */
+  }
+
+  .navbar-brand:hover {
+    color: #ff9800; /* Brand hover color */
+  }
+
+  .navbar-nav .nav-link {
+    padding: 0.5rem 1rem;
+    font-size: 1.2rem;
+    color: #ffffff; /* Link color */
+  }
+
+  .navbar-nav .nav-link:hover {
+    color: #ff9800; /* Link hover color */
+  }
+
+  .navbar-toggler {
+    border-color: #ffffff; /* Toggler border color */
+  }
+
+  .navbar-toggler-icon {
+    color: #ffffff; /* Toggler icon color */
+  }
+
+  .dropdown-menu {
+    background-color: #343a40; /* Dropdown background color */
+  }
+
+  .dropdown-item {
+    color: #ffffff; /* Dropdown item text color */
+  }
+
+  .dropdown-item:hover,
+  .dropdown-item:focus {
+    background-color: #ead1ab; /* Dropdown item hover color */
+  }
+</style>
+
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand" href="#">BloG</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="/">Home</a>
+        </li>
+        <% if (locals.user) { %>
+        <li class="nav-item">
+          <a class="nav-link" href="/blog/addblog">Add Blog</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <%= user.fullName %>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="/user/logout">Log Out</a></li>
+          </ul>
+        </li>
+        <% } else { %>
+        <li class="nav-item">
+          <a class="nav-link" href="/user/signup">Create Account</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/user/signin">Sign In</a>
+        </li>
+        <% } %>
+      </ul>
+    </div>
+  </div>
+</nav>
